@@ -1,0 +1,125 @@
+// Link: https://www.hackerrank.com/contests/23-jun-jul-ccc-vu-consolidate-ph-123-coding-practice/challenges/hack-13/problem
+
+/* Problem: 
+
+Abhishek is a gamer who loves to play computer and video games and currently he is playing a game "I am a Victor". Right now he's planning to attack his opponent in the game, but Abhishek's forces cannot enter the opponent's territory since the opponent has built a wall.
+
+N sections are aligned in a row to make up the wall. The i-th section initially has durability a[i].   It is considered broken if a section's durability falls to zero or less.
+
+Abhishek must breach the wall in at least two places in order to attack the opponent (any two sections: possibly adjacent, possibly not). He intends to carry out this mission with a bronajer, a unique siege weapon. Any part of the wall can be shot with the bronajer; the shot inflicts 2 damage on the intended area and 1 damage on surrounding areas. To put it another way, if the bronajer shoots at section x, then the section x's durability decreases by 2 and the durability of sections x-1 and x+1 (if they exit) decreases by 1 each
+
+Abhishek can shoot at any sections any number of times, he can even shoot at broken sections.
+
+Abhishek wants to calculate the minimum number of bronajer shots needed to break at least two sections. Help him!
+
+Input Format
+
+The first line contains one integer n — the number of sections.
+
+The second line contains the sequence of integers a1,a2,…,an , where a[i] is the initial durability of the i-th section.
+
+Constraints
+
+(2≤n≤2⋅10^5)
+(1≤a[i]≤10^6)
+Output Format
+
+Print one integer — the minimum number of bronajer shots needed to break at least two sections of the wall.
+
+Sample Input 0
+
+8
+9 10 3 6 8 10 8 7 
+Sample Output 0
+
+3
+Sample Input 1
+
+7
+6 2 6 5 9 3 2 
+Sample Output 1
+
+2
+
+
+*/
+
+// **************************** Soution Here **************************************
+
+// In Java: 
+
+import java.util.*;
+import java.util.Arrays;
+import java.lang.Math;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int n = input.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = input.nextInt();
+        }
+        int res = (int) Math.pow(10, 6);
+        for (int i = 1; i < n - 1; i++) {
+            if (a[i] > a[i - 1]) {
+                int x = (int) Math.ceil(a[i] / 2.0);
+                if (x < a[i - 1]) {
+                    x += (int) Math.ceil((a[i - 1] - x) / 2.0);
+                }
+                res = Math.min(x, res);
+            } else {
+                int x = (int) Math.ceil(a[i - 1] / 2.0);
+                if (x < a[i]) {
+                    x += (int) Math.ceil((a[i] - x) / 2.0);
+                }
+                res = Math.min(x, res);
+            }
+            if (a[i] > a[i + 1]) {
+                int x = (int) Math.ceil(a[i] / 2.0);
+                if (x < a[i + 1]) {
+                    x += (int) Math.ceil((a[i + 1] - x) / 2.0);
+                }
+                res = Math.min(x, res);
+            } else {
+                int x = (int) Math.ceil(a[i + 1] / 2.0);
+                if (x < a[i]) {
+                    x += (int) Math.ceil((a[i] - x) / 2.0);
+                }
+                res = Math.min(x, res);
+            }
+        }
+        Arrays.sort(a);
+        int x = (int) Math.ceil(a[0] / 2.0) + (int) Math.ceil(a[1] / 2.0);
+        System.out.println(Math.min(res, x));
+    }
+}
+
+
+# ------------------------------------------------------------------------------------------------------------------------
+Source code in python 
+
+from math import ceil
+n=int(input())
+a=list(map(int,input().split()))
+res=10**6
+for i in range(1,n-1):
+    if(a[i]>a[i-1]):
+        x=ceil(a[i]/2)
+        if(x<a[i-1]): x+=ceil((a[i-1]-x)/2)
+        res=min(x,res)
+    else:
+        x=ceil(a[i-1]/2)
+        if(x<a[i]): x+=ceil((a[i]-x)/2)
+        res=min(x,res)
+    if a[i]>a[i+1]:
+        x=ceil(a[i]/2)
+        if(x<a[i+1]): x+=ceil((a[i+1]-x)/2)
+        res=min(x,res)
+    else:
+        x=ceil(a[i+1]/2)
+        if(x<a[i]): x+=ceil((a[i]-x)/2)
+        res=min(x,res)
+a.sort()
+x=ceil(a[0]/2)+ceil(a[1]/2)
+print(min(res,x))
