@@ -36,9 +36,9 @@ Sample Output 1
 */
 
 // ***************************************** SOLUTION HERE *************************************************************************
+// Method : 1 
 
 // Source code :- IN Java 
-
 
 import java.util.Scanner;
 
@@ -71,6 +71,10 @@ public class Main {
     }
 }
 
+// Method 2: By using Stack 
+
+
+
 // --------------------------------------------- PYTHON Source Code  ------------------------------------------------------------------
 # Source Code: Python 
 
@@ -89,6 +93,20 @@ for i in range(n):
     else: print(x,end=' ')
 
 
+
+#  Method 2: By using Stack 
+
+
+n=int(input())
+a=list(map(int,input().split()))
+res=[-1]*n
+s=[]
+for i in range(2*n-1,-1,-1):
+    while s!=[] and s[-1]<=a[i%n]:s.pop()
+    if i<n:
+        if(s!=[]):res[i]=s[-1]
+    s.append(a[i%n])
+print(*res)
 
 
 
