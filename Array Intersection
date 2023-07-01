@@ -1,0 +1,81 @@
+//Link: - https://www.hackerrank.com/contests/23-jun-jul-ccc-vu-consolidate-ph-123-coding-practice/challenges/amazon-82
+/* 
+Problem: -  
+
+Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must be unique and you may return the result in sorted order.
+
+Input Format
+
+The first line contains two integers N and M.
+The Second line contains N integers representing the nums1 elements.
+The third line contains M integers representing the nums2 elements.
+Constraints
+
+1 <= nums1.length, nums2.length <= 100000
+0 <= nums1[i], nums2[i] <= 1000
+Output Format
+
+Print the array of integers which is the answer to the question
+
+Sample Input 0
+
+4 2
+1 2 2 1
+2 3
+Sample Output 0
+
+2 
+Sample Input 1
+
+2 3
+1 2
+2 3 1
+Sample Output 1
+
+1 2 
+
+*/
+
+// ********************************** Solution here ************************************
+
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        
+        Scanner sc = new Scanner(System.in);
+        int n=sc.nextInt();
+        int m=sc.nextInt();
+        HashSet<Integer> Hs1= new HashSet<>();
+       for(int i=0;i<n;i++){
+            Hs1.add(sc.nextInt());
+       }
+
+       HashSet<Integer> Hs2 = new HashSet<>();
+       for(int j=0;j<m;j++){
+           int num=sc.nextInt();
+            if(Hs1.contains(num)){
+              Hs2.add(num);
+            }
+       }
+        
+        
+         int res[] = new int[Hs2.size()];
+        Iterator<Integer> iterator = Hs2.iterator();
+        for (int i = 0; i < res.length; i++) {
+              res[i] = iterator.next();
+        }
+        Arrays.sort(res);
+        
+        for (int i = 0; i < res.length; i++) {
+              System.out.print(res[i]+" ");// = iterator.next();
+        }
+        
+        
+        
+    }
+}
+
