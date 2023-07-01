@@ -1,0 +1,86 @@
+// link:- https://www.hackerrank.com/contests/23-jun-jul-ccc-vu-consolidate-ph-123-coding-practice/challenges/amazon-37
+// Poroblem: -
+
+Given a rows x cols binary matrix filled with 0's and 1's, find the largest rectangle containing only 1's and return its area.
+
+Input Format
+
+The First line contains a integer N and M denoting the number of rows and columns respectively.
+The next lines contains M integers denoting the value of elements of array.
+Constraints
+
+rows == matrix.length
+cols == matrix[i].length
+1 <= row, cols <= 200
+matrix[i][j] is '0' or '1'.
+Output Format
+
+Print the integer which is the answer to the question
+
+Sample Input 0
+
+4 6
+0 1 0 0 0 1 
+1 0 1 1 1 0 
+1 1 1 1 1 0 
+0 0 1 0 1 1 
+Sample Output 0
+
+6
+Sample Input 1
+
+3 6
+1 1 1 0 0 1 
+0 1 0 1 1 0 
+1 0 1 0 0 1  
+Sample Output 1
+
+3
+*/
+
+// ************************************* Solution Here ***************************************
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+     public static int maximalRectangle(char[][] matrix) {
+        int ans = 0, m=matrix.length,n = matrix[0].length,INF = -m*n;
+        for(int j=0;j<n;j++){
+            int[] temp = new int[m];
+            for(int z=j;z<n;z++){
+                for(int c=0;c<m;c++) temp[c]+= matrix[c][z]=='0'?INF:1;
+        
+                ans = Math.max(ans,kadaneAlgo(temp));
+            }
+        }
+        return ans;
+    }
+    
+    private static int kadaneAlgo(int[] arr){
+        int max = arr[0], local_max = arr[0];
+        for(int i=1;i<arr.length;i++){
+            local_max = Math.max(arr[i],local_max+arr[i]);
+            max = Math.max(local_max,max);
+        }
+        return max;
+    }
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+          Scanner sc=new Scanner(System.in);
+        int m=sc.nextInt();
+        int n=sc.nextInt();
+        char arr[][]=new char[m][n];
+       
+        for(int i=0;i<m;i++)
+        {
+                for(int ii=0;ii<n;ii++)
+                {
+                    arr[i][ii]=sc.next().charAt(0);
+                 }
+        }
+        System.out.print(maximalRectangle(arr));
+        
+        
+    }
+}
