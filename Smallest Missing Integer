@@ -1,0 +1,67 @@
+// Link: - https://www.hackerrank.com/contests/23-jun-jul-ccc-vu-consolidate-ph-123-coding-practice/challenges/amazon-20
+/* Problem 
+
+Gopi likes randomness and always wants to store things in a random order. He applies this method in datastructures too. He would always want to store elements in random fashion(Unsorted). One day he was told that few elements of the array are missing, and he wants to find the smallest one in quick time. Since he is busy in a random walk, you being his friend should help him find the smallest missing element.
+
+Given an unsorted integer array nums, return the smallest missing positive integer.
+
+You must implement an algorithm that runs in O(n) time and uses constant extra space.
+
+Input Format
+
+The first line contains a integer N
+The second line contains N integers denoting the elements of array nums.
+Constraints
+
+1 <= nums.length <= 10^5
+-2^31 <= nums[i] <= 2^31 - 1
+Output Format
+
+Print a integer which is the answer to the question.
+
+Sample Input 0
+
+9
+6 7 8 8 3 2 7 5 8
+Sample Output 0
+
+1
+Sample Input 1
+
+8
+1 2 2 3 4 3 2 4
+Sample Output 1
+
+5
+
+*/ 
+
+// *************************************** Solution Here *******************************
+
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+         Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+      HashSet<Integer> set=new HashSet<>();
+        for(int i=0;i<n;i++)
+        {
+            set.add(sc.nextInt());
+        }
+        int sum=0;
+        int i=0;
+        for(i=1;i<n;i++)
+        {
+            if(!set.contains(i))
+            {
+             break;
+            }
+         }
+        System.out.println(i);
+        
+    }
+}
