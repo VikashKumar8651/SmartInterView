@@ -1,0 +1,98 @@
+// Link: https://www.hackerrank.com/contests/23-jun-jul-ccc-vu-consolidate-ph-123-coding-practice/challenges/amazon-83/copy-from/1363610373
+/* 
+Problelm: - 
+
+Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must appear as many times as it shows in both arrays and you may return the result in sorted order.
+
+Input Format
+
+The first line contains two integers N and M.
+The Second line contains N integers representing the nums1 elements.
+The third line contains M integers representing the nums2 elements.
+Constraints
+
+1 <= nums1.length, nums2.length <= 100000 0 <= nums1[i], nums2[i] <= 1000
+
+Output Format
+
+Print the array of integers which is the answer to the question
+
+Sample Input 0
+
+3 5
+4 9 5
+9 4 9 8 4
+Sample Output 0
+
+4 9 
+Sample Input 1
+
+2 3
+1 2
+2 3 1
+Sample Output 1
+
+1 2 
+
+*/
+
+// *************************** Soution ***********************************
+
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+     public static int[] intersect(int[] nums1, int[] nums2) {
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        ArrayList<Integer> arr = new ArrayList<Integer>();
+        int i = 0, j = 0;
+
+        while(i < nums1.length && j < nums2.length){
+            if(nums1[i] < nums2[j]) {
+                i++;
+            }
+            else if(nums1[i] > nums2[j]){
+                j++;
+            }
+            else{
+                arr.add(nums1[i]);
+                i++;
+                j++;
+            }
+        }
+        
+        int[] output = new int[arr.size()];
+        int k = 0;
+        while(k < arr.size()){
+            output[k] = arr.get(k);
+            k++;
+        }
+        return output;
+    }
+    
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner (System.in);
+        int n=sc.nextInt();
+        int nums1[]=new int[n];
+        int m=sc.nextInt();
+        int nums2[]=new int[m];
+        for(int i=0;i<n;i++)
+        {
+            nums1[i]=sc.nextInt();
+        }
+        for(int i=0;i<m;i++)
+        {
+            nums2[i]=sc.nextInt();
+        }
+        int arr[]=intersect(nums1,nums2);
+        for(int i=0;i<arr.length;i++)
+        {
+            System.out.print(arr[i]+" ");
+        }
+            
+        
+    }
+}
+
